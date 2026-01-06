@@ -1,0 +1,47 @@
+AndroidManifest.xml and permissions
+What is AndroidManifest.xml?
+Declares app components (activities, services, etc.)
+Lists required permissions
+Defines app metadata (package name, version, etc.)
+Android reads it at install/launch time
+What are permissions?
+Permissions grant access to device features or data
+Examples: camera, location, internet, storage
+Users grant permissions at install or runtime (depending on Android version)
+Why INTERNET permission is needed
+To open URLs or make network requests, the app needs the INTERNET permission.
+<uses-permission android:name="android.permission.INTERNET" />
+Without it:
+Cannot open URLs in a browser
+Cannot make HTTP/HTTPS requests
+Network operations fail
+How it works in your app
+Permission declared in AndroidManifest.xml:
+   <uses-permission android:name="android.permission.INTERNET" />
+Code opens a URL:
+   Intent intent = new Intent(Intent.ACTION_VIEW);   intent.setData(Uri.parse("https://www.google.com"));   startActivity(intent);
+Android checks the manifest for INTERNET permission
+If present, Android allows the network action
+The browser opens the URL
+Security and privacy
+INTERNET is a normal permission (not dangerous)
+No user prompt required
+Users see it in the Play Store listing
+It only enables network access; the app still needs to request it
+What happens without it
+The app may crash when trying to open URLs
+Network operations fail silently
+Error messages like "Network security policy" or "Permission denied"
+In your specific case
+When the win logo is clicked:
+MainActivity creates an Intent to open a URL
+Android checks for INTERNET permission
+If granted, the browser opens the URL
+If not, the operation fails
+Summary
+INTERNET permission is required for network access
+Declared once in AndroidManifest.xml
+No runtime prompt for normal permissions
+Enables opening URLs and making network requests
+Users can see it in the app’s permissions list
+This is a standard permission for apps that need network access.
